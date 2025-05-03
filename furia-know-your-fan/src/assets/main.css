@@ -1,21 +1,32 @@
 @import './base.css';
 
+/* Reseta o estilo da página */
 html,
 body {
   margin: 0;
   padding: 0;
   height: 100vh;
   background-color: #121212;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 
+/* Simula uma tela de celular 9:16 */
 #app {
-  width: 100%;
+  width: 100vw;
+  max-width: 430px;           /* largura aproximada de smartphone moderno */
   height: 100vh;
-  font-weight: normal;
+  aspect-ratio: 9 / 16;        /* força a proporção */
+  background: #121212;
   overflow: hidden;
+  position: relative;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
 }
 
+/* Links padrão */
 a,
 .green {
   text-decoration: none;
@@ -27,12 +38,5 @@ a,
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
   }
 }
