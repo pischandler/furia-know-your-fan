@@ -1,31 +1,42 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import StoryPlayer from '@/components/StoryPlayer.vue'
-import CsQuestion1 from '@/components/questions/CsQuestion1.vue'
 import { csStories } from '@/data/CsStories'
+import CsQuestion1 from '@/components/questions/CsQuestion1.vue'
+import CsQuestion2 from '@/components/questions/CsQuestion2.vue'
+import CsQuestion3 from '@/components/questions/CsQuestion3.vue'
+import CsQuestion4 from '@/components/questions/CsQuestion4.vue'
+import { lolStories } from '@/data/LolStories'
+import { klStories } from '@/data/KlStories'
 
-const phase = ref<'stories' | 'quiz' | 'next'>('stories')
-const answer = ref('')
+const phaseIndex = ref(0)
+const currentQuestion = ref(1)
 
 function handleStoriesEnd() {
-  phase.value = 'quiz'
+  phaseIndex.value++
 }
 
-function handleAnswer(selected: string) {
-  answer.value = selected
-  phase.value = 'next'
+function handleAnswer(selected: string | string[]) {
+  if (currentQuestion.value < 4) {
+    currentQuestion.value++
+  } else {
+    currentQuestion.value = 1
+    phaseIndex.value++
+  }
 }
 </script>
 
 <template>
-  <StoryPlayer v-if="phase === 'stories'" :stories="csStories" @end="handleStoriesEnd" />
+  <StoryPlayer v-if="phaseIndex === 0" :stories="csStories" @end="handleStoriesEnd" />
 
-  <CsQuestion1 v-else-if="phase === 'quiz'" @answered="handleAnswer" />
+  <template v-else-if="phaseIndex === 1">
+    <CsQuestion1 v-if="currentQuestion === 1" @answered="handleAnswer" />
+    <CsQuestion2 v-else-if="currentQuestion === 2" @answered="handleAnswer" />
+    <CsQuestion3 v-else-if="currentQuestion === 3" @answered="handleAnswer" />
+    <CsQuestion4 v-else-if="currentQuestion === 4" @answered="handleAnswer" />
+  </template>
 
-  <div v-else class="text-center mt-10">
-    <h2 class="text-h5">Obrigado por responder!</h2>
-    <p class="mt-2">
-      Você acompanha a FURIA: <strong>{{ answer }}</strong>
-    </p>
-  </div>
+  <StoryPlayer v-else-if="phaseIndex === 2" :stories="lolStories" @end="handleStoriesEnd" />
+
+  <StoryPlayer v-else-if="phaseIndex === 3" :stories="klStories" @end="handleStoriesEnd" />
 </template>
