@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import logo from '@/assets/logo1.png'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 const email = ref('')
 const password = ref('')
 
+const router = useRouter()
+
 function login() {
   console.log('Login com', email.value, password.value)
+  router.push('/RegisterStep1')
 }
 </script>
 
