@@ -5,6 +5,7 @@ import RegisterStep2 from '@/routes/register/RegisterStep2.vue'
 import GameStart from '@/routes/GameStart.vue'
 import RegisterStep3 from '@/routes/register/RegisterStep3.vue'
 import DocumentSuccess from '@/routes/register/DocumentSuccess.vue'
+import GameSuccess from '@/routes/GameSuccess.vue'
 
 const routes = [
   { path: '/', name: 'login', component: LoginView },
@@ -13,6 +14,7 @@ const routes = [
   { path: '/RegisterStep3', name: 'form-reg-3', component: RegisterStep3 },
   { path: '/DocumentSuccess', name: 'success', component: DocumentSuccess },
   { path: '/game', name: 'game', component: GameStart },
+  { path: '/GameSuccess', name: 'success', component: GameSuccess },
 ]
 
 const router = createRouter({
