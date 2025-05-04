@@ -59,8 +59,13 @@ function handleMouseMove(event: MouseEvent) {
     }"
   >
     <div class="position-absolute top-0 text-center w-100 mt-6">
-      <h2 class="text-h6 font-weight-bold mb-2">Pergunta:</h2>
-      <p class="font-weight-medium">{{ props.question }}</p>
+      <div
+        class="mx-auto px-4 py-2 rounded"
+        style="display: inline-block; background-color: rgba(0, 0, 0, 0.5); color: white"
+      >
+        <h2 class="text-h6 font-weight-bold mb-1">Pergunta:</h2>
+        <p class="font-weight-medium mb-0">{{ props.question }}</p>
+      </div>
     </div>
 
     <v-row class="justify-center align-center w-100 mt-12" style="z-index: 5" no-gutters>
