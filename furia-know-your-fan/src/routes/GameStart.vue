@@ -2,10 +2,13 @@
 import { ref } from 'vue'
 import StoryPlayer from '@/components/StoryPlayer.vue'
 import { csStories } from '@/data/CsStories'
-import CsQuestion1 from '@/components/questions/CsQuestion1.vue'
-import CsQuestion2 from '@/components/questions/CsQuestion2.vue'
-import CsQuestion3 from '@/components/questions/CsQuestion3.vue'
-import CsQuestion4 from '@/components/questions/CsQuestion4.vue'
+import CsQuestion1 from '@/components/questions/cs/CsQuestion1.vue'
+import CsQuestion2 from '@/components/questions/cs/CsQuestion2.vue'
+import CsQuestion3 from '@/components/questions/cs/CsQuestion3.vue'
+import CsQuestion4 from '@/components/questions/cs/CsQuestion4.vue'
+import LolQuestion1 from '@/components/questions/lol/LolQuestion1.vue'
+import LolQuestion2 from '@/components/questions/lol/LolQuestion2.vue'
+import LolQuestion3 from '@/components/questions/lol/LolQuestion3.vue'
 import { lolStories } from '@/data/LolStories'
 import { klStories } from '@/data/KlStories'
 
@@ -38,5 +41,11 @@ function handleAnswer(selected: string | string[]) {
 
   <StoryPlayer v-else-if="phaseIndex === 2" :stories="lolStories" @end="handleStoriesEnd" />
 
-  <StoryPlayer v-else-if="phaseIndex === 3" :stories="klStories" @end="handleStoriesEnd" />
+  <template v-else-if="phaseIndex === 3">
+    <LolQuestion1 v-if="currentQuestion === 1" @answered="handleAnswer" />
+    <LolQuestion2 v-else-if="currentQuestion === 2" @answered="handleAnswer" />
+    <LolQuestion3 v-else-if="currentQuestion === 3" @answered="handleAnswer" />
+  </template>
+
+  <StoryPlayer v-else-if="phaseIndex === 4" :stories="klStories" @end="handleStoriesEnd" />
 </template>
