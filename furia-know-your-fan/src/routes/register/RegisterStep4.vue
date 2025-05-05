@@ -1,16 +1,12 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
 import logo from '@/assets/logo3.png'
-import UserFormStep3 from '@/components/forms/UserFormStep3.vue'
+import UserFormStep4 from '@/components/forms/UserFormStep4.vue'
+import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
 function backStep() {
-  router.push('/RegisterStep2')
-}
-
-function nextStep() {
-  router.push('/RegisterStep4')
+  router.push('/RegisterStep3')
 }
 </script>
 
@@ -36,16 +32,9 @@ function nextStep() {
     >
       <v-img :src="logo" width="180" class="mb-2" contain />
 
-      <UserFormStep3 />
-
+      <UserFormStep4 />
       <div class="d-flex justify-space-between align-center mt-6 w-100">
-        <v-btn icon color="white" @click="backStep">
-          <v-icon>mdi-arrow-left</v-icon>
-        </v-btn>
-
-        <v-btn icon color="white" @click="nextStep">
-          <v-icon>mdi-arrow-right</v-icon>
-        </v-btn>
+        <v-btn color="white" block class="mt-6" @click="backStep"> Voltar </v-btn>
       </div>
     </v-card>
   </v-container>

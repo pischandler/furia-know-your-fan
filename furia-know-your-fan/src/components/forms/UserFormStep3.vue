@@ -1,29 +1,10 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 
-const documentType = ref('')
-const documentFile = ref<File | null>(null)
-
-const router = useRouter()
-
-const instructionsMap: Record<string, string> = {
-  RG: 'Envie uma foto nítida da frente e verso do seu RG.',
-  CNH: 'Envie uma imagem da sua CNH com todos os dados visíveis.',
-  Passaporte: 'Envie a página do passaporte que contém sua foto e dados pessoais.',
-}
-
-const instructions = computed(
-  () =>
-    instructionsMap[documentType.value] || 'Selecione um tipo de documento para ver as instruções.',
-)
-
-function submitDocument() {
-  console.log('Documento:', documentType.value)
-  console.log('Arquivo:', documentFile.value)
-
-  router.push('/DocumentSuccess')
-}
+const instagram = ref('')
+const twitter = ref('')
+const twitch = ref('')
+const youtube = ref('')
 </script>
 
 <template>
@@ -32,11 +13,12 @@ function submitDocument() {
     class="d-flex flex-column align-center justify-center px-6 py-8"
     style="background-color: rgba(0, 0, 0, 0.7); width: 100%; max-width: 360px; border-radius: 20px"
   >
-    <v-select
-      v-model="documentType"
-      label="Tipo de documento"
-      :items="['RG', 'CNH', 'Passaporte']"
-      class="mb-4 w-100 text-white"
+    <v-text-field
+      v-model="instagram"
+      prepend-inner-icon="mdi-instagram"
+      label="Instagram"
+      placeholder="@seuusuario"
+      class="mb-3 w-100 text-white"
       variant="outlined"
       density="comfortable"
       hide-details
@@ -44,25 +26,43 @@ function submitDocument() {
       style="background-color: rgba(255, 255, 255, 0.1); border-radius: 22px"
     />
 
-    <p class="text-white text-caption mb-3 text-center min-h-[2em]">
-      {{ instructions }}
-    </p>
-
-    <v-file-input
-      v-model="documentFile"
-      label="Envie o arquivo"
-      accept="image/*,.pdf"
-      :disabled="!documentType"
-      class="mb-4 w-100 text-white"
+    <v-text-field
+      v-model="twitter"
+      prepend-inner-icon="mdi-twitter"
+      label="Twitter / X"
+      placeholder="@seuusuario"
+      class="mb-3 w-100 text-white"
       variant="outlined"
       density="comfortable"
-      color="white"
       hide-details
-      style="background-color: rgba(255, 255, 255, 0.1); border-radius: 10px"
+      rounded
+      style="background-color: rgba(255, 255, 255, 0.1); border-radius: 22px"
     />
 
-    <v-btn color="white" block class="mt-2" :disabled="!documentFile" @click="submitDocument">
-      Enviar documento
-    </v-btn>
+    <v-text-field
+      v-model="twitch"
+      prepend-inner-icon="mdi-twitch"
+      label="Twitch"
+      placeholder="twitch.tv/seuusuario"
+      class="mb-3 w-100 text-white"
+      variant="outlined"
+      density="comfortable"
+      hide-details
+      rounded
+      style="background-color: rgba(255, 255, 255, 0.1); border-radius: 22px"
+    />
+
+    <v-text-field
+      v-model="youtube"
+      prepend-inner-icon="mdi-youtube"
+      label="YouTube"
+      placeholder="youtube.com/@seucanal"
+      class="mb-3 w-100 text-white"
+      variant="outlined"
+      density="comfortable"
+      hide-details
+      rounded
+      style="background-color: rgba(255, 255, 255, 0.1); border-radius: 22px"
+    />
   </v-card>
 </template>
